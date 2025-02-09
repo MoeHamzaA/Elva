@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classification Results</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #9ff9ff;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            background: rgb(238,174,202);
+            background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            color: #4CAF50;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            color: #555;
+        }
+
+        hr {
+            margin: 40px auto;
+            width: 50%;
+            border: 1px solid #ddd;
+        }
+
+        p {
+            margin-top: 10px;
+            font-size: 1em;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin: 10px 0;
+            font-size: 1em;
+            color: #333;
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            background-color: #3e8e41;
+            transform: scale(0.95);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 300px;
+            margin: 20px 0;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+        }
+
+        /* Centered Content */
+        .center {
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .centerCard {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="centerCard">
+        <div class="center">
+            <h1>Object Detection Results</h1>
+
+            <img src="{{ image_path }}" alt="Uploaded Image">
+
+            <h2>Detected Objects:</h2>
+            <ul>
+                {% for obj in detected_objects %}
+                <li>
+                    {{ obj.label }}
+                </li>
+                {% endfor %}
+            </ul>
+
+            <hr/>
+
+            <h2>How to Use:</h2>
+            <ul>
+                
+                <li>
+                    {{ usage_instructions }}
+                </li>
+                
+            </ul>
+
+            <hr />
+
+            <a href="/">
+                <button>Back to Home</button>
+            </a>
+        </div>
+    </div>
+    
+</body>
+</html>
