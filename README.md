@@ -1,6 +1,6 @@
-Alzheimer's Aid App
+# Alzheimer's Aid App, Elva
 
-The Alzheimer's Aid App is an AI-powered web application designed to assist individuals with Alzheimer's and dementia in identifying everyday objects and recognizing faces. The app incorporates live camera integration, object detection, and facial recognition to simplify day-to-day tasks and promote independence.
+The Alzheimer's Aid App, Known as Elva, is an AI-powered web application designed to assist individuals with Alzheimer's and dementia in identifying everyday objects and recognizing faces. The app incorporates live camera integration, object detection, and facial recognition to simplify day-to-day tasks and promote independence.
 
 Features
 
@@ -133,4 +133,3 @@ DETR: For enabling efficient object detection.
 Flask: For serving as the backbone of the web application.
 
 Special thanks to all contributors and testers who made this project possible.
-
