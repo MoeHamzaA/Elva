@@ -28,23 +28,6 @@ DETR for object detection
 
 Database: JSON-based storage for face embeddings
 
-Project Structure
-
-.
-  ├── app.py                  # Main Flask application
-  ├── static/
-  │   ├── css/                # CSS files for styling
-  │   ├── js/
-  │   │   └── camera.js       # JavaScript for camera functionality
-  │   └── uploads/            # Directory for uploaded images
-  ├── templates/
-  │   ├── index.html          # Homepage
-  │   ├── detect.html         # Upload or take a photo for object detection
-  │   ├── results.html        # Display object detection results
-  │   ├── camera.html         # Live camera feed for facial recognition
-  │   └── camera_detect.html  # Live camera feed for object detection
-  ├── face_database.json      # JSON database for facial recognition
-  └── README.md               # Project documentation
 
 Setup and Installation
 
