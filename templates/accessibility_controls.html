@@ -1,0 +1,160 @@
+<!-- Accessibility Controls -->
+<style>
+    .accessibility-panel {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        z-index: 1000;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        max-width: 300px;
+    }
+
+    @media (max-width: 768px) {
+        .accessibility-panel {
+            bottom: 0;
+            right: 0;
+            left: 0;
+            border-radius: 10px 10px 0 0;
+            justify-content: center;
+            max-width: 100%;
+        }
+    }
+
+    .toggle-button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        background: #4CAF50;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .toggle-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .toggle-button.active {
+        background: #2E7D32;
+    }
+
+    .toggle-icon {
+        font-size: 1.2em;
+    }
+
+    .toggle-text {
+        font-size: 0.9em;
+    }
+</style>
+
+<div class="accessibility-panel">
+    <button class="toggle-button" onclick="toggleHighContrast()" id="contrastToggle">
+        <span class="toggle-icon">🌓</span>
+        <span class="toggle-text">High Contrast</span>
+    </button>
+    
+    <button class="toggle-button" onclick="toggleLargeText()" id="textToggle">
+        <span class="toggle-icon">📏</span>
+        <span class="toggle-text">Large Text</span>
+    </button>
+    
+    <button class="toggle-button" onclick="toggleVoice()" id="voiceToggle">
+        <span class="toggle-icon">🔊</span>
+        <span class="toggle-text">Voice</span>
+    </button>
+</div>
+
+<div class="help-text">
+    <p>Keyboard Shortcuts:</p>
+    <ul style="list-style: none; text-align: left;">
+        <li>'h' - Go to Home</li>
+        <li>'c' - Toggle High Contrast</li>
+        <li>'t' - Toggle Large Text</li>
+        <li>'v' - Toggle Voice</li>
+    </ul>
+</div>
+
+<script>
+    let voiceEnabled = true;
+    let highContrastEnabled = false;
+    let largeTextEnabled = false;
+
+    // Toggle voice feedback
+    function toggleVoice() {
+        voiceEnabled = !voiceEnabled;
+        const button = document.getElementById('voiceToggle');
+        button.classList.toggle('active');
+        button.querySelector('.toggle-text').textContent = voiceEnabled ? 'Voice' : 'Voice Off';
+        
+        if (voiceEnabled && typeof voiceFeedback !== 'undefined') {
+            playVoiceFeedback(voiceFeedback);
+        }
+    }
+
+    // Toggle high contrast mode
+    function toggleHighContrast() {
+        highContrastEnabled = !highContrastEnabled;
+        document.body.classList.toggle('high-contrast');
+        const button = document.getElementById('contrastToggle');
+        button.classList.toggle('active');
+    }
+
+    // Toggle large text mode
+    function toggleLargeText() {
+        largeTextEnabled = !largeTextEnabled;
+        document.body.classList.toggle('large-text');
+        const button = document.getElementById('textToggle');
+        button.classList.toggle('active');
+    }
+
+    // Play voice feedback
+    function playVoiceFeedback(files) {
+        if (!voiceEnabled || !files || !files.length) return;
+        
+        let currentIndex = 0;
+        const audio = new Audio(files[currentIndex]);
+        
+        audio.onended = () => {
+            currentIndex++;
+            if (currentIndex < files.length) {
+                const nextAudio = new Audio(files[currentIndex]);
+                nextAudio.play();
+            }
+        };
+        
+        audio.play();
+    }
+
+    // Initialize voice feedback if available
+    window.onload = function() {
+        if (typeof voiceFeedback !== 'undefined' && voiceEnabled) {
+            playVoiceFeedback(voiceFeedback);
+        }
+    };
+
+    // Add keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'h') {  // 'h' for home
+            window.location.href = '/';
+        }
+        if (e.key === 'c') {  // 'c' for contrast
+            toggleHighContrast();
+        }
+        if (e.key === 't') {  // 't' for text size
+            toggleLargeText();
+        }
+        if (e.key === 'v') {  // 'v' for voice
+            toggleVoice();
+        }
+    });
+</script> 

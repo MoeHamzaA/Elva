@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Elva</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #9ff9ff;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            background: rgb(238,174,202);
+            background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            color: #e74c3c;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+            margin: 10px;
+            min-width: 200px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            background-color: #3e8e41;
+            transform: scale(0.95);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* Centered Content */
+        .center {
+            width: 90%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border: 2px solid #e74c3c;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .centerCard {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Accessibility Features */
+        .high-contrast {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .large-text {
+            font-size: 1.5em;
+        }
+
+        /* Error Icon */
+        .error-icon {
+            font-size: 4em;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="centerCard">
+        <div class="center">
+            <div class="error-icon">⚠️</div>
+            <h1>Oops! Something went wrong</h1>
+            <p>{{ message }}</p>
+            <p>Don't worry, let's try again!</p>
+            
+            <a href="/">
+                <button>Back to Home</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Add keyboard shortcuts for accessibility
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'h') {  // 'h' for home
+                window.location.href = '/';
+            }
+        });
+
+        // Add high contrast mode toggle
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'c') {  // 'c' for contrast
+                document.body.classList.toggle('high-contrast');
+            }
+        });
+
+        // Add large text mode toggle
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 't') {  // 't' for text size
+                document.body.classList.toggle('large-text');
+            }
+        });
+    </script>
+</body>
+</html> 

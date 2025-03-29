@@ -1,0 +1,54 @@
+[
+  {
+    "timestamp": "2025-03-29T18:05:15.406707",
+    "image_path": "static/uploads\\captured_image_14578ac7-aa0b-43af-9cd3-bf33229a4f07.jpg",
+    "detected_objects": [],
+    "description": "I'm not sure what I'm looking at. Could you try taking another photo?"
+  },
+  {
+    "timestamp": "2025-03-29T18:12:43.920998",
+    "image_path": "static/uploads/image_20250329_181243.jpg",
+    "detected_objects": [],
+    "description": "I'm not sure what I'm looking at. Could you try taking another photo?"
+  },
+  {
+    "timestamp": "2025-03-29T18:14:11.876795",
+    "image_path": "static/uploads/image_20250329_181411.jpg",
+    "detected_objects": [],
+    "description": "I'm not sure what I'm looking at. Could you try taking another photo?"
+  },
+  {
+    "timestamp": "2025-03-29T18:19:01.935266",
+    "image_path": "static/uploads/image_20250329_181900.jpg",
+    "detected_objects": [
+      {
+        "label": "cup",
+        "score": 0.9988259673118591,
+        "box": [
+          992.83,
+          794.33,
+          2768.24,
+          2034.29
+        ]
+      }
+    ],
+    "description": "I'm very confident this is a cup. {'description': 'This is a container with a handle, used for drinking liquids.', 'usage': 'Hold the handle and bring the cup to your mouth to drink. Be careful with hot liquids.'}"
+  },
+  {
+    "timestamp": "2025-03-29T18:30:25.253349",
+    "image_path": "static/uploads/image_20250329_183023.jpg",
+    "detected_objects": [
+      {
+        "label": "cup",
+        "score": 0.9988259673118591,
+        "box": [
+          992.83,
+          794.33,
+          2768.24,
+          2034.29
+        ]
+      }
+    ],
+    "description": "I'm very confident this is a cup. {'description': 'This is a container with a handle, used for drinking liquids.', 'usage': 'Hold the handle and bring the cup to your mouth to drink. Be careful with hot liquids.'}"
+  }
+]

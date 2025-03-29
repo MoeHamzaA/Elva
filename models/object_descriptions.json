@@ -1,0 +1,78 @@
+{
+    "telephone": {
+        "description": "This is a device used to talk to people who are far away. It can be used to call family, friends, or emergency services.",
+        "usage": "To make a call, pick up the phone and press the numbers you want to call. The green button is usually to answer calls, and the red button is to end calls."
+    },
+    "television": {
+        "description": "This is a device that shows moving pictures and sound. It can display news, shows, and movies.",
+        "usage": "The power button turns the TV on and off. Use the remote control to change channels and adjust the volume. The numbers on the remote help you go directly to specific channels."
+    },
+    "refrigerator": {
+        "description": "This is a large appliance that keeps food cold and fresh. It has a freezer section for keeping food frozen.",
+        "usage": "The handle on the door opens the refrigerator. The top section is usually the freezer, and the bottom section is for keeping food cold. The temperature controls are usually inside."
+    },
+    "microwave": {
+        "description": "This is a kitchen appliance that heats up food quickly using special waves.",
+        "usage": "To heat food, open the door, place your food inside, close the door, and press the time buttons. The start button begins heating. Always use microwave-safe containers."
+    },
+    "toilet": {
+        "description": "This is a bathroom fixture used for personal hygiene.",
+        "usage": "The handle or button on the side flushes the toilet. The seat can be raised or lowered. Always wash your hands after use."
+    },
+    "chair": {
+        "description": "This is a piece of furniture designed for sitting. It has a backrest and seat.",
+        "usage": "To sit down, position yourself in front of the chair and lower yourself gently. The backrest provides support for your back."
+    },
+    "table": {
+        "description": "This is a flat surface supported by legs, used for eating, writing, or placing items.",
+        "usage": "Place items on the flat surface. The height is designed for comfortable use while sitting in a chair."
+    },
+    "bed": {
+        "description": "This is a piece of furniture used for sleeping and resting.",
+        "usage": "The mattress provides a comfortable surface for sleeping. The headboard is at the top of the bed. Use pillows for head support and blankets for warmth."
+    },
+    "lamp": {
+        "description": "This is a device that provides light. It can be turned on and off.",
+        "usage": "The switch on the lamp or its cord turns the light on and off. Position the lamp where you need light."
+    },
+    "door": {
+        "description": "This is a movable barrier that opens and closes to allow entry or exit from a room.",
+        "usage": "The handle or knob is used to open and close the door. Push or pull the door in the direction it moves."
+    },
+    "window": {
+        "description": "This is an opening in a wall that lets in light and air.",
+        "usage": "The handle or latch opens and closes the window. Some windows slide up and down, others open outward."
+    },
+    "clock": {
+        "description": "This is a device that shows the current time.",
+        "usage": "The numbers on the clock face show the hours. The longer hand shows minutes, and the shorter hand shows hours."
+    },
+    "book": {
+        "description": "This is a collection of printed pages bound together, containing text or pictures.",
+        "usage": "Open the book by separating the front and back covers. Turn pages from right to left to read."
+    },
+    "pen": {
+        "description": "This is a writing instrument used to make marks on paper.",
+        "usage": "Hold the pen between your fingers and press the tip against paper to write. The cap protects the tip when not in use."
+    },
+    "cup": {
+        "description": "This is a container with a handle, used for drinking liquids.",
+        "usage": "Hold the handle and bring the cup to your mouth to drink. Be careful with hot liquids."
+    },
+    "plate": {
+        "description": "This is a flat dish used for serving food.",
+        "usage": "Place food on the flat surface. The raised edge helps keep food from falling off."
+    },
+    "fork": {
+        "description": "This is an eating utensil with prongs used for picking up food.",
+        "usage": "Hold the handle and use the prongs to pick up food. The curved shape helps scoop food."
+    },
+    "spoon": {
+        "description": "This is an eating utensil with a shallow bowl used for eating liquids or soft foods.",
+        "usage": "Hold the handle and use the bowl to scoop food or liquid."
+    },
+    "knife": {
+        "description": "This is a utensil with a sharp edge used for cutting food.",
+        "usage": "Hold the handle and use the sharp edge to cut food. Be careful with the sharp edge."
+    }
+} 

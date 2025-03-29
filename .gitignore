@@ -1,5 +1,24 @@
-# Ignore the virtual environment
-venv/
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
 
-# Ignore the face database JSON file
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# Downloaded model files
+models/models/
+
+# Temporary files
+static/temp/
+static/uploads/
+static/voice_feedback/
+
+# Database
 face_database.json
+
+# IDE
+.vscode/
+.idea/

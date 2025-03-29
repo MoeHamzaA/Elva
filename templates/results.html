@@ -1,151 +1,182 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classification Results</title>
-    <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+{% extends "base.html" %}
 
-        body {
-            background-color: #9ff9ff;
-            color: #333;
-            text-align: center;
-            padding: 20px;
-            background: rgb(238,174,202);
-            background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
-        }
+{% block title %}What is This? - Elva{% endblock %}
 
-        h1 {
-            margin-bottom: 20px;
-            font-size: 2.5em;
-            color: #4CAF50;
-        }
+{% block extra_css %}
+<style>
+    /* Page-specific styles */
+    .centerCard {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
 
-        h2 {
-            margin-bottom: 15px;
-            font-size: 1.8em;
-            color: #555;
-        }
+    .center {
+        width: 90%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border: 3px solid #4CAF50;
+        border-radius: 20px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
 
-        hr {
-            margin: 40px auto;
-            width: 50%;
-            border: 1px solid #ddd;
-        }
+    .image-container {
+        margin: 20px 0;
+        position: relative;
+        display: inline-block;
+    }
 
-        p {
-            margin-top: 10px;
-            font-size: 1em;
-            color: #333;
-        }
+    img {
+        max-width: 100%;
+        height: auto;
+        border: 2px solid #4CAF50;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
+    .bounding-box {
+        position: absolute;
+        border: 2px solid #4CAF50;
+        background-color: rgba(76, 175, 80, 0.1);
+        pointer-events: none;
+    }
 
-        ul li {
-            margin: 10px 0;
-            font-size: 1em;
-            color: #333;
-        }
+    .object-label {
+        position: absolute;
+        background-color: #4CAF50;
+        color: white;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-size: 0.8em;
+        pointer-events: none;
+    }
 
-        /* Button Styling */
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1em;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s, transform 0.2s;
-            margin: 10px;
-        }
+    .object-list {
+        margin: 20px 0;
+        text-align: left;
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+    }
 
-        button:hover {
-            background-color: #45a049;
-            transform: scale(1.05);
-        }
+    .object-item {
+        margin: 15px 0;
+        padding: 15px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
 
-        button:active {
-            background-color: #3e8e41;
-            transform: scale(0.95);
-        }
+    .object-name {
+        font-size: 1.4em;
+        color: #4CAF50;
+        margin-bottom: 10px;
+    }
 
-        a {
-            text-decoration: none;
-        }
+    .confidence {
+        font-size: 0.9em;
+        color: #666;
+        margin-bottom: 10px;
+    }
 
-        img {
-            max-width: 300px;
-            margin: 20px 0;
-            border: 2px solid #4CAF50;
-            border-radius: 10px;
-        }
+    .usage-section {
+        margin: 30px 0;
+        padding: 20px;
+        background-color: #e8f5e9;
+        border-radius: 10px;
+        text-align: left;
+    }
 
-        /* Centered Content */
-        .center {
-            width: 80%;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 30px;
-            background-color: #ffffff;
-            border: 2px solid #4CAF50;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+    .usage-title {
+        font-size: 1.4em;
+        color: #2e7d32;
+        margin-bottom: 15px;
+    }
 
-        .centerCard {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-    </style>
-</head>
-<body>
+    .usage-content {
+        font-size: 1.2em;
+        line-height: 1.8;
+    }
+</style>
+{% endblock %}
 
-    <div class="centerCard">
-        <div class="center">
-            <h1>Object Detection Results</h1>
+{% block content %}
+<div class="centerCard">
+    <div class="center">
+        <h1>What is This?</h1>
 
-            <img src="{{ image_path }}" alt="Uploaded Image">
-
-            <h2>Detected Objects:</h2>
-            <ul>
-                {% for obj in detected_objects %}
-                <li>
-                    {{ obj.label }}
-                </li>
-                {% endfor %}
-            </ul>
-
-            <hr/>
-
-            <h2>How to Use:</h2>
-            <ul>
-                
-                <li>
-                    {{ usage_instructions }}
-                </li>
-                
-            </ul>
-
-            <hr />
-
-            <a href="/">
-                <button>Back to Home</button>
-            </a>
+        <div class="image-container">
+            <img src="{{ image_path }}" alt="Uploaded Image" id="detection-image">
+            {% for obj in detected_objects %}
+            <div class="bounding-box" 
+                 data-box='{{ obj.box|tojson }}'>
+            </div>
+            <div class="object-label" 
+                 data-box='{{ obj.box|tojson }}'>
+                {{ obj.label }} ({{ "%.1f"|format(obj.score * 100) }}%)
+            </div>
+            {% endfor %}
         </div>
+
+        <div class="object-list">
+            <h2>I Can See:</h2>
+            {% for obj in detected_objects %}
+            <div class="object-item">
+                <div class="object-name">{{ obj.label }}</div>
+                <div class="confidence">Confidence: {{ "%.1f"|format(obj.score * 100) }}%</div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="usage-section">
+            <div class="usage-title">How to Use This:</div>
+            <div class="usage-content">
+                {{ usage_instructions }}
+            </div>
+        </div>
+
+        <hr />
+
+        <a href="/" class="button">Back to Home</a>
     </div>
-    
-</body>
-</html>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Scale bounding boxes to match the displayed image size
+    window.onload = function() {
+        const img = document.getElementById('detection-image');
+        const boxes = document.getElementsByClassName('bounding-box');
+        const labels = document.getElementsByClassName('object-label');
+        
+        function scaleBoxes() {
+            const scaleX = img.clientWidth / img.naturalWidth;
+            const scaleY = img.clientHeight / img.naturalHeight;
+            
+            for (let i = 0; i < boxes.length; i++) {
+                const box = boxes[i];
+                const label = labels[i];
+                const boxData = JSON.parse(box.dataset.box);
+                
+                // Scale box
+                box.style.left = (boxData[0] * scaleX) + 'px';
+                box.style.top = (boxData[1] * scaleY) + 'px';
+                box.style.width = ((boxData[2] - boxData[0]) * scaleX) + 'px';
+                box.style.height = ((boxData[3] - boxData[1]) * scaleY) + 'px';
+                
+                // Scale label
+                label.style.left = (boxData[0] * scaleX) + 'px';
+                label.style.top = ((boxData[1] - 20) * scaleY) + 'px';
+            }
+        }
+        
+        // Scale on load and resize
+        img.onload = scaleBoxes;
+        window.onresize = scaleBoxes;
+    };
+</script>
+{% endblock %}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Camera Feed</title>
+    <title>Remember People - Elva</title>
     <style>
         /* General Reset */
         * {
@@ -24,14 +24,28 @@
 
         h1 {
             margin-bottom: 20px;
-            font-size: 2.5em;
+            font-size: 3em;
             color: #4CAF50;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            font-size: 2em;
+            color: #555;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #333;
         }
 
         hr {
             margin: 40px auto;
             width: 50%;
-            border: 1px solid #ddd;
+            border: 2px solid #4CAF50;
         }
 
         /* Button Styling */
@@ -39,17 +53,20 @@
             background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 15px 30px;
-            font-size: 1em;
+            padding: 20px 40px;
+            font-size: 1.4em;
             cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s, transform 0.2s;
-            margin: 10px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            margin: 15px;
+            min-width: 250px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         button:hover {
             background-color: #45a049;
             transform: scale(1.05);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.2);
         }
 
         button:active {
@@ -67,6 +84,7 @@
             margin: 20px 0;
             border: 2px solid #4CAF50;
             border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         /* Result Text */
@@ -74,44 +92,896 @@
             font-size: 1.2em;
             margin-top: 20px;
             color: #333;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 1.1em;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            margin-top: 5px;
+            background-color: white;
+        }
+
+        /* Remembered People List */
+        .remembered-people {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 20px auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .person-card {
+            background-color: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+
+        .person-card h3 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        .person-card p {
+            margin: 5px 0;
+            font-size: 1.1em;
+        }
+
+        .person-actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .person-actions button {
+            padding: 8px 15px;
+            font-size: 1em;
+            min-width: auto;
         }
 
         /* Centered Content */
         .center {
-            width: 80%;
-            max-width: 600px;
+            width: 90%;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 30px;
+            padding: 40px;
             background-color: #ffffff;
-            border: 2px solid #4CAF50;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 3px solid #4CAF50;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
         }
 
         .centerCard {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+        }
+
+        /* Accessibility Features */
+        .high-contrast {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .high-contrast button {
+            background-color: #fff;
+            color: #000;
+        }
+
+        .high-contrast h1,
+        .high-contrast h2 {
+            color: #fff;
+        }
+
+        .large-text {
+            font-size: 1.5em;
+        }
+
+        .large-text button {
+            font-size: 1.8em;
+            padding: 25px 50px;
+        }
+
+        /* Help Text */
+        .help-text {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            font-size: 0.9em;
+            max-width: 300px;
+        }
+
+        /* Assistant Icon */
+        .assistant-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        /* Loading Indicator */
+        .loading {
+            display: none;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #4CAF50;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Memory Timeline */
+        .memory-timeline {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 20px auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-left: 3px solid #4CAF50;
+            margin: 10px 0;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #4CAF50;
+            margin-right: 10px;
+        }
+
+        .timeline-content {
+            flex-grow: 1;
+        }
+
+        /* Memory Notes */
+        .memory-notes {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .add-note-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .quick-action-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .quick-action-button i {
+            font-size: 1.2em;
+        }
+
+        /* Memory Game Styles */
+        .memory-game-container {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        .memory-game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .memory-card {
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .memory-card:hover {
+            transform: scale(1.05);
+        }
+
+        .memory-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .memory-card.selected {
+            border: 3px solid #4CAF50;
+        }
+
+        .memory-game-controls {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* View All Memories Styles */
+        .all-memories-container {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        .memory-filter {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        .filter-button.active {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-
     <div class="centerCard">
         <div class="center">
-            <h1>Live Camera Feed</h1>
+            <div class="assistant-icon">👋</div>
+            <h1>Remember People</h1>
+            <p>Take a photo to recognize or remember someone.</p>
+
             <video id="video" autoplay></video>
             <canvas id="canvas" style="display:none;"></canvas>
-            <button id="capture">Take Photo</button>
-            <p id="result"></p>
+            
+            <div class="button-group">
+                <button id="capture">Take Photo</button>
+                <button id="remember">Remember New Person</button>
+            </div>
+
+            <div id="result"></div>
+
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>Processing...</p>
+            </div>
+
+            <div class="remembered-people">
+                <h2>People I Remember</h2>
+                <div id="peopleList"></div>
+            </div>
+
+            <div class="memory-timeline">
+                <h2>Recent Memories</h2>
+                <div id="timelineList"></div>
+            </div>
+
+            <div class="memory-game">
+                <h2>Memory Practice</h2>
+                <p>Test your memory by matching faces with names</p>
+                <button class="memory-game-button" onclick="startMemoryGame()">Start Memory Game</button>
+                <div id="memoryGameContainer" class="memory-game-container">
+                    <div id="memoryGameGrid" class="memory-game-grid"></div>
+                    <div class="memory-game-controls">
+                        <button onclick="checkMemoryMatch()">Check Match</button>
+                        <button onclick="resetMemoryGame()">Reset Game</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <button class="quick-action-button" onclick="showAllMemories()">
+                    <i>📖</i> View All Memories
+                </button>
+                <button class="quick-action-button" onclick="exportMemories()">
+                    <i>💾</i> Save Memories
+                </button>
+            </div>
+
             <hr />
+
             <a href="/">
                 <button>Back to Home</button>
             </a>
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='js/camera.js') }}"></script>
+    <!-- Modal for adding new person -->
+    <div id="addPersonModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Remember New Person</h2>
+            <form id="addPersonForm">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="relationship">Relationship:</label>
+                    <select id="relationship">
+                        <option value="">Select relationship</option>
+                        <option value="family member">Family Member</option>
+                        <option value="friend">Friend</option>
+                        <option value="caregiver">Caregiver</option>
+                        <option value="doctor">Doctor</option>
+                        <option value="neighbor">Neighbor</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="description">Tell me about this person:</label>
+                    <textarea id="description" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Additional notes:</label>
+                    <textarea id="notes" rows="3"></textarea>
+                </div>
+                <button type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- View All Memories Container -->
+    <div id="allMemoriesContainer" class="all-memories-container">
+        <h2>All Memories</h2>
+        <div class="memory-filter">
+            <button class="filter-button active" onclick="filterMemories('all')">All</button>
+            <button class="filter-button" onclick="filterMemories('family')">Family</button>
+            <button class="filter-button" onclick="filterMemories('friends')">Friends</button>
+            <button class="filter-button" onclick="filterMemories('caregivers')">Caregivers</button>
+        </div>
+        <div id="allMemoriesList"></div>
+    </div>
+
+    <div class="help-text">
+        <p>Keyboard Shortcuts:</p>
+        <ul style="list-style: none; text-align: left;">
+            <li>'h' - Go to Home</li>
+            <li>'c' - Toggle High Contrast</li>
+            <li>'t' - Toggle Large Text</li>
+            <li>'r' - Remember New Person</li>
+        </ul>
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const captureButton = document.getElementById('capture');
+        const rememberButton = document.getElementById('remember');
+        const result = document.getElementById('result');
+        const modal = document.getElementById('addPersonModal');
+        const closeBtn = document.getElementsByClassName('close')[0];
+        const addPersonForm = document.getElementById('addPersonForm');
+        const loading = document.querySelector('.loading');
+        let currentImage = null;
+
+        // Access the user's webcam
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(error => {
+                console.error('Error accessing webcam:', error);
+                result.innerHTML = "Could not access camera. Please check permissions.";
+            });
+
+        // Show loading indicator
+        function showLoading() {
+            loading.style.display = 'block';
+        }
+
+        // Hide loading indicator
+        function hideLoading() {
+            loading.style.display = 'none';
+        }
+
+        // Play voice feedback
+        function playVoiceFeedback(files) {
+            if (files && files.length > 0) {
+                let currentIndex = 0;
+                const audio = new Audio(files[currentIndex]);
+                
+                audio.onended = () => {
+                    currentIndex++;
+                    if (currentIndex < files.length) {
+                        const nextAudio = new Audio(files[currentIndex]);
+                        nextAudio.play();
+                    }
+                };
+                
+                audio.play();
+            }
+        }
+
+        // Capture the photo
+        captureButton.addEventListener('click', () => {
+            showLoading();
+            const context = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            currentImage = canvas.toDataURL('image/jpeg');
+
+            // Send the captured image to the server
+            fetch('/recognize_face', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ image: currentImage })
+            })
+            .then(response => response.json())
+            .then(data => {
+                result.innerHTML = data.message;
+                if (data.voice_feedback) {
+                    playVoiceFeedback(data.voice_feedback);
+                }
+                hideLoading();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                result.innerHTML = "An error occurred. Please try again.";
+                hideLoading();
+            });
+        });
+
+        // Remember new person button
+        rememberButton.addEventListener('click', () => {
+            if (!currentImage) {
+                result.innerHTML = "Please take a photo first!";
+                return;
+            }
+            modal.style.display = "block";
+        });
+
+        // Close modal
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Handle form submission
+        addPersonForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            showLoading();
+            const name = document.getElementById('name').value;
+            const description = document.getElementById('description').value;
+            const relationship = document.getElementById('relationship').value;
+            const notes = document.getElementById('notes').value;
+
+            fetch('/add_face', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: name,
+                    description: description,
+                    relationship: relationship,
+                    notes: notes,
+                    image: currentImage
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                result.innerHTML = data.message;
+                if (data.voice_feedback) {
+                    playVoiceFeedback(data.voice_feedback);
+                }
+                modal.style.display = "none";
+                loadRememberedPeople();
+                hideLoading();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                result.innerHTML = "An error occurred. Please try again.";
+                hideLoading();
+            });
+        });
+
+        // Load remembered people
+        function loadRememberedPeople() {
+            fetch('/get_remembered_people')
+            .then(response => response.json())
+            .then(data => {
+                const peopleList = document.getElementById('peopleList');
+                peopleList.innerHTML = data.people.map(person => `
+                    <div class="person-card">
+                        <h3>${person.name}</h3>
+                        ${person.relationship ? `<p>Relationship: ${person.relationship}</p>` : ''}
+                        <p>${person.description || 'No description available'}</p>
+                        ${person.notes ? `<p>Notes: ${person.notes}</p>` : ''}
+                        <p>Last seen: ${new Date(person.last_seen).toLocaleString()}</p>
+                        <div class="person-actions">
+                            <button onclick="editPerson('${person.name}')">Edit</button>
+                            <button onclick="deletePerson('${person.name}')">Remove</button>
+                        </div>
+                    </div>
+                `).join('');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        // Edit person
+        window.editPerson = function(name) {
+            // Implement edit functionality
+            console.log('Edit person:', name);
+        }
+
+        // Delete person
+        window.deletePerson = function(name) {
+            if (confirm(`Are you sure you want to remove ${name} from memory?`)) {
+                showLoading();
+                fetch('/delete_person', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name: name })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    result.innerHTML = data.message;
+                    loadRememberedPeople();
+                    hideLoading();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    result.innerHTML = "An error occurred. Please try again.";
+                    hideLoading();
+                });
+            }
+        }
+
+        // Load memory timeline
+        function loadMemoryTimeline() {
+            fetch('/get_remembered_people')
+            .then(response => response.json())
+            .then(data => {
+                const timelineList = document.getElementById('timelineList');
+                const sortedPeople = data.people.sort((a, b) => 
+                    new Date(b.last_seen) - new Date(a.last_seen)
+                );
+                
+                timelineList.innerHTML = sortedPeople.slice(0, 5).map(person => `
+                    <div class="timeline-item">
+                        <div class="timeline-date">${new Date(person.last_seen).toLocaleDateString()}</div>
+                        <div class="timeline-content">
+                            <strong>${person.name}</strong>
+                            ${person.relationship ? `<br>${person.relationship}` : ''}
+                        </div>
+                    </div>
+                `).join('');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        // Memory game state
+        let memoryGameState = {
+            cards: [],
+            selectedCard: null,
+            matches: 0,
+            totalMatches: 0
+        };
+
+        // Memory game functionality
+        window.startMemoryGame = function() {
+            showLoading();
+            fetch('/get_remembered_people')
+            .then(response => response.json())
+            .then(data => {
+                const people = data.people;
+                if (people.length < 2) {
+                    result.innerHTML = "You need to remember at least 2 people to play the memory game.";
+                    hideLoading();
+                    return;
+                }
+
+                // Initialize memory game
+                memoryGameState.cards = [];
+                memoryGameState.selectedCard = null;
+                memoryGameState.matches = 0;
+                memoryGameState.totalMatches = people.length;
+
+                // Create memory cards
+                people.forEach(person => {
+                    memoryGameState.cards.push({
+                        name: person.name,
+                        relationship: person.relationship,
+                        description: person.description
+                    });
+                });
+
+                // Shuffle cards
+                memoryGameState.cards = shuffleArray([...memoryGameState.cards, ...memoryGameState.cards]);
+
+                // Display game grid
+                const gameGrid = document.getElementById('memoryGameGrid');
+                gameGrid.innerHTML = memoryGameState.cards.map((card, index) => `
+                    <div class="memory-card" onclick="selectMemoryCard(${index})">
+                        <div class="card-content">
+                            <h3>${card.name}</h3>
+                            <p>${card.relationship || 'Relationship not specified'}</p>
+                        </div>
+                    </div>
+                `).join('');
+
+                // Show game container
+                document.getElementById('memoryGameContainer').style.display = 'block';
+                hideLoading();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                result.innerHTML = "An error occurred. Please try again.";
+                hideLoading();
+            });
+        }
+
+        // Helper function to shuffle array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Select memory card
+        window.selectMemoryCard = function(index) {
+            const card = memoryGameState.cards[index];
+            const cardElement = document.querySelectorAll('.memory-card')[index];
+            
+            if (cardElement.classList.contains('matched')) return;
+            
+            if (memoryGameState.selectedCard === null) {
+                memoryGameState.selectedCard = { index, card };
+                cardElement.classList.add('selected');
+            } else {
+                if (memoryGameState.selectedCard.index === index) return;
+                
+                const selectedElement = document.querySelectorAll('.memory-card')[memoryGameState.selectedCard.index];
+                if (memoryGameState.selectedCard.card.name === card.name) {
+                    // Match found
+                    cardElement.classList.add('matched');
+                    selectedElement.classList.add('matched');
+                    memoryGameState.matches++;
+                    
+                    if (memoryGameState.matches === memoryGameState.totalMatches) {
+                        setTimeout(() => {
+                            alert('Congratulations! You matched all the cards!');
+                            resetMemoryGame();
+                        }, 500);
+                    }
+                } else {
+                    // No match
+                    setTimeout(() => {
+                        cardElement.classList.remove('selected');
+                        selectedElement.classList.remove('selected');
+                    }, 1000);
+                }
+                
+                memoryGameState.selectedCard = null;
+            }
+        }
+
+        // Reset memory game
+        window.resetMemoryGame = function() {
+            document.getElementById('memoryGameContainer').style.display = 'none';
+            memoryGameState = {
+                cards: [],
+                selectedCard: null,
+                matches: 0,
+                totalMatches: 0
+            };
+        }
+
+        // Show all memories
+        window.showAllMemories = function() {
+            showLoading();
+            fetch('/get_remembered_people')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('allMemoriesContainer');
+                container.style.display = 'block';
+                
+                const memoriesList = document.getElementById('allMemoriesList');
+                memoriesList.innerHTML = data.people.map(person => `
+                    <div class="person-card" data-category="${person.relationship || 'other'}">
+                        <h3>${person.name}</h3>
+                        ${person.relationship ? `<p>Relationship: ${person.relationship}</p>` : ''}
+                        <p>${person.description || 'No description available'}</p>
+                        ${person.notes ? `<p>Notes: ${person.notes}</p>` : ''}
+                        <p>Last seen: ${new Date(person.last_seen).toLocaleString()}</p>
+                        <div class="person-actions">
+                            <button onclick="editPerson('${person.name}')">Edit</button>
+                            <button onclick="deletePerson('${person.name}')">Remove</button>
+                        </div>
+                    </div>
+                `).join('');
+                
+                hideLoading();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                result.innerHTML = "An error occurred while loading memories.";
+                hideLoading();
+            });
+        }
+
+        // Filter memories
+        window.filterMemories = function(category) {
+            const buttons = document.querySelectorAll('.filter-button');
+            buttons.forEach(button => button.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const cards = document.querySelectorAll('.person-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Load both remembered people and timeline on page load
+        loadRememberedPeople();
+        loadMemoryTimeline();
+
+        // Add keyboard shortcuts for accessibility
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'h') {  // 'h' for home
+                window.location.href = '/';
+            }
+            if (e.key === 'c') {  // 'c' for contrast
+                document.body.classList.toggle('high-contrast');
+            }
+            if (e.key === 't') {  // 't' for text size
+                document.body.classList.toggle('large-text');
+            }
+            if (e.key === 'r') {  // 'r' for remember
+                rememberButton.click();
+            }
+        });
+
+        // Add voice feedback for buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mouseover', function() {
+                const text = this.textContent;
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 0.8; // Slower speech rate
+                window.speechSynthesis.speak(utterance);
+            });
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Elva - Your Memory Assistant{% endblock %}</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f8ff;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Common styles */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* High Contrast Mode */
+        .high-contrast {
+            background-color: #000 !important;
+            color: #fff !important;
+        }
+
+        .high-contrast .card,
+        .high-contrast .center,
+        .high-contrast .container {
+            background-color: #222 !important;
+            border-color: #fff !important;
+        }
+
+        .high-contrast .object-item,
+        .high-contrast .usage-section {
+            background-color: #333 !important;
+        }
+
+        .high-contrast .button {
+            background-color: #fff !important;
+            color: #000 !important;
+        }
+
+        /* Large Text Mode */
+        .large-text {
+            font-size: 1.2em !important;
+        }
+
+        .large-text h1 {
+            font-size: 2.4em !important;
+        }
+
+        .large-text h2 {
+            font-size: 2em !important;
+        }
+
+        .large-text p {
+            font-size: 1.2em !important;
+        }
+
+        .large-text .button {
+            font-size: 1.2em !important;
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    {% block content %}{% endblock %}
+
+    {% if include_accessibility %}
+    {% include 'accessibility_controls.html' %}
+    {% endif %}
+
+    {% block extra_js %}{% endblock %}
+
+    <div id="voiceFeedbackData" data-feedback='{% if voice_feedback %}{{ voice_feedback|tojson|safe }}{% else %}[]{% endif %}'></div>
+    <script>
+        window.voiceFeedback = JSON.parse(document.getElementById('voiceFeedbackData').dataset.feedback);
+    </script>
+</body>
+</html> 
