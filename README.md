@@ -1,6 +1,6 @@
-Alzheimer's Aid App
+# Alzheimer's Aid App, Elva
 
-The Alzheimer's Aid App is an AI-powered web application designed to assist individuals with Alzheimer's and dementia in identifying everyday objects and recognizing faces. The app incorporates live camera integration, object detection, and facial recognition to simplify day-to-day tasks and promote independence.
+The Alzheimer's Aid App, Known as Elva, is an AI-powered web application designed to assist individuals with Alzheimer's and dementia in identifying everyday objects and recognizing faces. The app incorporates live camera integration, object detection, and facial recognition to simplify day-to-day tasks and promote independence.
 
 Features
 
@@ -28,23 +28,6 @@ DETR for object detection
 
 Database: JSON-based storage for face embeddings
 
-Project Structure
-
-.
-├── app.py                  # Main Flask application
-├── static/
-│   ├── css/                # CSS files for styling
-│   ├── js/
-│   │   └── camera.js       # JavaScript for camera functionality
-│   └── uploads/            # Directory for uploaded images
-├── templates/
-│   ├── index.html          # Homepage
-│   ├── detect.html         # Upload or take a photo for object detection
-│   ├── results.html        # Display object detection results
-│   ├── camera.html         # Live camera feed for facial recognition
-│   └── camera_detect.html  # Live camera feed for object detection
-├── face_database.json      # JSON database for facial recognition
-└── README.md               # Project documentation
 
 Setup and Installation
 
@@ -133,4 +116,3 @@ DETR: For enabling efficient object detection.
 Flask: For serving as the backbone of the web application.
 
 Special thanks to all contributors and testers who made this project possible.
-

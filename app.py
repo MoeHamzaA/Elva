@@ -491,4 +491,7 @@ if __name__ == "__main__":
     # Start cleanup thread
     cleanup_thread = threading.Thread(target=cleanup_temp_files, daemon=True)
     cleanup_thread.start()
-    app.run(debug=True)
+    
+    # Use production server if PORT environment variable is set (e.g., on Render)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
