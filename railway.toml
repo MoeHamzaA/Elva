@@ -1,4 +1,0 @@
-[build]
-  [build.nixpacks]
-    plan = "python"
-    config = { pythonVersion = "3.10" }
