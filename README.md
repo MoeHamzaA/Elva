@@ -1,118 +1,111 @@
-# Alzheimer's Aid App, Elva
+# Elva – Alzheimer's Aid App 🧠✨
 
-The Alzheimer's Aid App, Known as Elva, is an AI-powered web application designed to assist individuals with Alzheimer's and dementia in identifying everyday objects and recognizing faces. The app incorporates live camera integration, object detection, and facial recognition to simplify day-to-day tasks and promote independence.
+**Elva** is an AI-powered web application designed to assist individuals with Alzheimer's and dementia in recognizing familiar faces and identifying everyday objects. With live camera integration, object detection, facial recognition, and usage guidance, Elva empowers users to live more independently.
 
-Features
+---
 
-Live Camera Integration: Users can capture images directly using a live camera feed.
+## 🧩 Features
 
-Object Detection: AI-based object detection helps users identify objects in their surroundings.
+- 📸 **Live Camera Integration**: Capture images directly using a live camera feed.
+- 🧠 **Object Detection**: AI-powered object identification using DETR.
+- 🙂 **Facial Recognition**: Recognizes and identifies people from a stored facial database using InsightFace.
+- 📝 **Custom Usage Instructions**: Displays step-by-step guidance on how to use detected objects.
+- 🖥️ **User-Friendly Interface**: Simple, clean, and accessible UI for all users.
 
-Facial Recognition: Recognizes and identifies faces using a stored database of embeddings.
+---
 
-Custom Usage Instructions: Provides step-by-step guidance on how to use the detected objects.
+## 🛠️ Tech Stack
 
-User-Friendly Interface: Simple and consistent UI design for ease of use.
+- **Backend**: Python, Flask
+- **Frontend**: HTML, CSS, JavaScript
+- **AI Models**:
+  - [InsightFace](https://github.com/deepinsight/insightface) for facial recognition
+  - [DETR](https://github.com/facebookresearch/detectron2) for object detection
+- **Database**: JSON-based storage for face embeddings
 
-Tech Stack
+---
 
-Backend: Python, Flask
+## 🚀 Setup & Installation
 
-Frontend: HTML, CSS, JavaScript
+### 📋 Prerequisites
 
-AI Models:
+- Python 3.8+
+- Flask
+- OpenCV
+- InsightFace
+- DETR and its dependencies
 
-InsightFace for facial recognition
+### 📦 Installation Steps
 
-DETR for object detection
+1. **Clone the repository**:
 
-Database: JSON-based storage for face embeddings
+    ```bash
+    git clone https://github.com/your-username/alzheimers-aid-app.git
+    cd alzheimers-aid-app
+    ```
 
+2. **Set up a virtual environment**:
 
-Setup and Installation
+    ```bash
+    python -m venv venv
+    source venv/bin/activate   # On Windows: venv\Scripts\activate
+    ```
 
-Prerequisites
+3. **Install dependencies**:
 
-Python 3.8 or later
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-Flask
+4. **Download AI Models**:
+    - Place **InsightFace** models in the `models/` directory.
+    - Set up **DETR** models according to its documentation.
 
-OpenCV
+5. **Run the application**:
 
-InsightFace
+    ```bash
+    python app.py
+    ```
 
-DETR and related dependencies
+6. **Access in browser**:
 
-Installation
+    ```
+    http://127.0.0.1:5000
+    ```
 
-Clone the repository:
+---
 
-git clone https://github.com/your-username/alzheimers-aid-app.git
-cd alzheimers-aid-app
+## 🧪 How to Use
 
-Set up a virtual environment:
+- **Homepage**: Choose between *Object Detection* or *Facial Recognition*.
+- **Object Detection**: Upload or capture an image → View detected objects → Get usage instructions.
+- **Facial Recognition**: Capture or upload a face → Match against database → Optionally add new faces.
+- **Results Page**: Review results and navigate back for additional tasks.
 
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+---
 
-Install dependencies:
+## 🌱 Future Enhancements
 
-pip install -r requirements.txt
+- 🌍 Multilingual support
+- 👤 Personalized user accounts
+- 🔊 Audio descriptions for visually impaired users
+- 🧾 Expanded object category support
 
-Download required AI models:
+---
 
-Place InsightFace models in the models/ directory.
+## 📜 License
 
-Set up DETR models for object detection.
+This project is licensed under the [MIT License](./LICENSE).
 
-Run the app:
+---
 
-python app.py
+## 🙏 Acknowledgments
 
-Open the app in your browser:
+- [InsightFace](https://github.com/deepinsight/insightface): Facial Recognition
+- [DETR](https://github.com/facebookresearch/detectron2): Object Detection
+- [Flask](https://flask.palletsprojects.com): Web Framework
 
-http://127.0.0.1:5000
+Special thanks to our contributors and testers for their time and feedback 💙
 
-How to Use
+---
 
-Homepage:
-
-Navigate to the homepage to choose between object detection or facial recognition.
-
-Object Detection:
-
-Upload an image or use the live camera to capture a photo.
-
-View the detected objects along with step-by-step instructions on how to use them.
-
-Facial Recognition:
-
-Use the live camera to recognize faces or add new faces to the database.
-
-Results Page:
-
-Review the detection results and return to the homepage for further actions.
-
-Future Enhancements
-
-Add multilingual support for a wider user base.
-
-Implement user accounts for personalized face and object databases.
-
-Integrate audio descriptions for users with visual impairments.
-
-Expand the object detection model to cover more categories.
-
-License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-Acknowledgments
-
-InsightFace: For providing a robust facial recognition library.
-
-DETR: For enabling efficient object detection.
-
-Flask: For serving as the backbone of the web application.
-
-Special thanks to all contributors and testers who made this project possible.
