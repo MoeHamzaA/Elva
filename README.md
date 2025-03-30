@@ -1,4 +1,5 @@
-# Elva – Alzheimer's Aid App 🧠✨
+# Elva – Alzheimer's Aid App 🧠✨  
+### 🥉 3rd Place Winner at HackHive Hackathon 2025
 
 **Elva** is an AI-powered web application designed to assist individuals with Alzheimer's and dementia in recognizing familiar faces and identifying everyday objects. With live camera integration, object detection, facial recognition, and usage guidance, Elva empowers users to live more independently.
 
@@ -93,6 +94,12 @@
 
 ---
 
+## 🔗 Project Links
+
+- 🔹 [Devpost Submission – MindGuide (Elva)](https://devpost.com/software/mindguide-6bms3h)
+
+---
+
 ## 📜 License
 
 This project is licensed under the [MIT License](./LICENSE).
@@ -108,4 +115,3 @@ This project is licensed under the [MIT License](./LICENSE).
 Special thanks to our contributors and testers for their time and feedback 💙
 
 ---
-
